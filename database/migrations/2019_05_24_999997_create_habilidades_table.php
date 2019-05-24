@@ -20,6 +20,7 @@ class CreateHabilidadesTable extends Migration
             $table->string('Institucion');
             $table->integer('id_desarrollador')->unsigned();
             $table->timestamps();
+            $table->foreign('id_desarrollador')->references('id')->on('desarrolladors')->onDelete('cascade');
         });
     }
 

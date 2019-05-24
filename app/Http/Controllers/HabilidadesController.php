@@ -82,4 +82,6 @@ class HabilidadesController extends Controller
     {
         //
     }
+
+
 }

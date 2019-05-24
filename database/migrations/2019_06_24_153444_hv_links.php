@@ -16,6 +16,7 @@ class HvLinks extends Migration
         Schema::create('hv_links', function (Blueprint $table) {
             $table->Increments('id');
             $table->string('url');
+            $table->string('descripcion');
             $table->integer('id_desarrollador')->unsigned();
             $table->timestamps();
             $table->foreign('id_desarrollador')->references('id')->on('desarrolladors')->onDelete('cascade');

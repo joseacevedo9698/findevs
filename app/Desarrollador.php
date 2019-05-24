@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Desarrollador extends Model
 {
     protected $table = 'desarrolladors';
-    protected $fillable = ['id_persona', 'Ocupacion','Disponibilidad','Experiencia','Link_HV'];
+    protected $fillable = ['id_persona', 'Ocupacion','Disponibilidad','Link_HV'];
     protected $guarded = ['id'];
 
 

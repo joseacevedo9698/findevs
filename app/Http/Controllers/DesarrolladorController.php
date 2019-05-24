@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Experiencia_laboral;
+use App\Desarrollador;
 use Illuminate\Http\Request;
 
-class ExperienciaLaboralController extends Controller
+
+class DesarrolladorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,13 +39,14 @@ class ExperienciaLaboralController extends Controller
         //
     }
 
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Experiencia_laboral  $experiencia_laboral
+     * @param  \App\Desarrollador  $desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function show(Experiencia_laboral $experiencia_laboral)
+    public function show(Desarrollador $desarrollador)
     {
         //
     }
@@ -52,10 +54,10 @@ class ExperienciaLaboralController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Experiencia_laboral  $experiencia_laboral
+     * @param  \App\Desarrollador  $desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function edit(Experiencia_laboral $experiencia_laboral)
+    public function edit(Desarrollador $desarrollador)
     {
         //
     }
@@ -64,10 +66,10 @@ class ExperienciaLaboralController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Experiencia_laboral  $experiencia_laboral
+     * @param  \App\Desarrollador  $desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Experiencia_laboral $experiencia_laboral)
+    public function update(Request $request, Desarrollador $desarrollador)
     {
         //
     }
@@ -75,13 +77,18 @@ class ExperienciaLaboralController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Experiencia_laboral  $experiencia_laboral
+     * @param  \App\Desarrollador  $desarrollador
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Experiencia_laboral $experiencia_laboral)
+    public function destroy(Desarrollador $desarrollador)
     {
         //
     }
+
+
+
+
+
 
 
 }

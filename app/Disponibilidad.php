@@ -12,6 +12,6 @@ class Disponibilidad extends Model
 
     public function desarrollador()
     {
-        return $this->belongsTo('App\Desarrollador', 'Disponibilidad');
+        return $this->hasOne('App\Desarrollador', 'Disponibilidad');
     }
 }

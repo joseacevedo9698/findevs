@@ -12,6 +12,6 @@ class Ocupacion extends Model
 
     public function desarrollador()
     {
-        return $this->belongsTo('App\Desarrollador', 'Ocupacion');
+        return $this->hasOne('App\Desarrollador', 'Ocupacion');
     }
 }

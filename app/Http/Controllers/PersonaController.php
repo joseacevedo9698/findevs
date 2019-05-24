@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Persona;
 use App\User;
+use App\Desarrollador;
+use App\Experiencia_laboral;
+use App\Hv_link;
+use App\Habilidades;
 use Illuminate\Http\Request;
 use Validator;
+
 class PersonaController extends Controller
 {
     /**
@@ -76,8 +81,35 @@ class PersonaController extends Controller
             $user->remember_token = str_random(60);
             $persona->user()->save($user);
             $user->save();
+
+            $experiencia=[
+                [
+                    'Nombre_empresa' => 'apps.co',
+                    'Cargo' => 'Gerente',
+                    'Tiempo' => '2014/05/08'
+                ]
+                ];
+            $proyectos=[
+                [
+                    'url' => 'comics-gaia.test',
+                    'descripcion' => 'esta es una descripcion'
+                ]
+                ];
+            $habilidades=[
+                [
+                    'Nombre_habilidad' => 'PHP',
+                    'Fecha' => '2019/06/05',
+                    'Institucion' => 'Centro Inca'
+                ]
+                ];
+            $ocupacion =$request->input('ocupacion');
+            $disponibilidad =$request->input('disponibilidad');
+            $link_HV =$request->input('link_HV');
+            $this->insertdesarrollador($persona->id,$experiencia,$ocupacion,$disponibilidad,$habilidades,$link_HV,$proyectos);
+
             return "success";
         }
+
 
 
 
@@ -128,4 +160,71 @@ class PersonaController extends Controller
     {
         //
     }
+
+    public function insertdesarrollador($id_persona,$experiencia,$ocupacion,$disponibilidad,$habilidades,$link_HV,$proyectos)
+    {
+        $desarrollador = new Desarrollador();
+        $desarrollador->id_persona = $id_persona;
+        $desarrollador->Ocupacion = $ocupacion;
+        $desarrollador->Disponibilidad = $disponibilidad;
+        $desarrollador->Link_HV = $link_HV;
+        $desarrollador->save();
+
+        $this->inserthabilidades($habilidades,$desarrollador->id);
+
+        $this->insertexperiencia($experiencia,$desarrollador->id);
+
+        $this->insertproyectos($proyectos,$desarrollador->id);
+
+
+
+    }
+
+    public function insertexperiencia($experiencias, $id_desarrollador)
+    {
+        if(!empty($experiencias)){
+            foreach ($experiencias as $h) {
+                $experiencia = new Experiencia_laboral();
+                $experiencia->Nombre_empresa = $h['Nombre_empresa'];
+                $experiencia->Cargo = $h['Cargo'];
+                $experiencia->Tiempo = $h['Tiempo'];
+                $experiencia->id_desarrollador = $id_desarrollador;
+                $experiencia->save();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function inserthabilidades($habilidades, $id_desarrollador)
+    {
+        if(!empty($habilidades)){
+            foreach ($habilidades as $h) {
+                $habilidad = new Habilidades();
+                $habilidad->Nombre_habilidad = $h['Nombre_habilidad'];
+                $habilidad->Fecha_aprendizaje = $h['Fecha'];
+                $habilidad->Institucion = $h['Institucion'];
+                $habilidad->id_desarrollador = $id_desarrollador;
+                $habilidad->save();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public function insertproyectos($proyectos, $id_desarrollador)
+    {
+        if(!empty($proyectos)){
+            foreach ($proyectos as $h) {
+                $proyecto = new Hv_link();
+                $proyecto->url = $h['url'];
+                $proyecto->descripcion = $h['descripcion'];
+                $proyecto->id_desarrollador = $id_desarrollador;
+                $proyecto->save();
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

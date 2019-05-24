@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Desarrollador;
+use App\Hv_link;
 use Illuminate\Http\Request;
 
-class DesarrolladorController extends Controller
+class Hv_linkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class DesarrolladorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Desarrollador  $desarrollador
+     * @param  \App\Hv_link  $hv_link
      * @return \Illuminate\Http\Response
      */
-    public function show(Desarrollador $desarrollador)
+    public function show(Hv_link $hv_link)
     {
         //
     }
@@ -52,10 +52,10 @@ class DesarrolladorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Desarrollador  $desarrollador
+     * @param  \App\Hv_link  $hv_link
      * @return \Illuminate\Http\Response
      */
-    public function edit(Desarrollador $desarrollador)
+    public function edit(Hv_link $hv_link)
     {
         //
     }
@@ -64,10 +64,10 @@ class DesarrolladorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Desarrollador  $desarrollador
+     * @param  \App\Hv_link  $hv_link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Desarrollador $desarrollador)
+    public function update(Request $request, Hv_link $hv_link)
     {
         //
     }
@@ -75,11 +75,14 @@ class DesarrolladorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Desarrollador  $desarrollador
+     * @param  \App\Hv_link  $hv_link
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Desarrollador $desarrollador)
+    public function destroy(Hv_link $hv_link)
     {
         //
     }
+
+
+
 }

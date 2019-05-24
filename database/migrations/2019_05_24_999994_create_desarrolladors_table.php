@@ -18,7 +18,6 @@ class CreateDesarrolladorsTable extends Migration
             $table->integer('id_persona')->unsigned();
             $table->integer('Ocupacion')->unsigned();
             $table->integer('Disponibilidad')->unsigned();
-            $table->integer('Experiencia');
             $table->string('Link_HV');
             $table->timestamps();
             $table->foreign('Ocupacion')->references('id')->on('ocupacions')->onDelete('cascade');
