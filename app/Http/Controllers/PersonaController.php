@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Persona;
 use App\User;
 use Illuminate\Http\Request;
-
+use Validator;
 class PersonaController extends Controller
 {
     /**
@@ -35,39 +35,53 @@ class PersonaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $credentials = $this->validate(request(),[
-            'nombres' =>'required|string|min:3|max:60',
-            'apéllidos' =>'required|string|min:3|max:60',
-            'fecha'=> 'required|date',
-            'telefono'=>'required|Numeric|min:10|max:12',
-            'name' => 'required|string|min:3|max:60',
-            'email'=> 'required|email|unique:users',
-            'password' => 'required|min:4|max:60',
-            'password_confirmation'=>'required|same:password',
+     {
+         $rules = [
+             'nombres' =>'required|string|min:3|max:60',
+             'apellidos' =>'required|string|min:3|max:60',
+             'fecha'=> 'required|date',
+             'telefono'=>'required|Numeric|min:10',
+             'email'=> 'required|email|unique:users',
+             'password' => 'required|min:4|max:60',
+             'password_confirmation'=>'required|same:password',
 
-        ]);
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails())
+        {
+            return $validator->messages()->first();
+        }else{
 
 
-         if ($credentials) {
             $persona = new Persona();
             $persona->Nombres = $request->input('nombres');
             $persona->Apellidos = $request->input('apellidos');
             $persona->Fecha_nacimiento = $request->input('fecha');
             $persona->Correo = $request->input('email');
             $persona->Telefono = $request->input('telefono');
-            $persona->Foto_perfil = $request->input('foto');
-            $user = new User($request->all());
+            $id = $persona->id;
+            if ($request->file('myFile')) {
+                $path = Storage::disk('public')->put('image',$request->file('foto'));
+                $persona->Foto_perfil = asset($path);
+            }else{
+                $persona->Foto_perfil = 'null';
+            }
+            $persona->save();
 
+            $user = new User();
+            $user->email = $request->input('email');
+            $user->password = bcrypt($request->input('password'));
             $user->remember_token = str_random(60);
-            $user->password = bcrypt($user->password);
+            $persona->user()->save($user);
             $user->save();
-         }
+            return "success";
+        }
 
-        return back()
-        ->withErrors(['email' => trans('auth.failed'),
-        'password' => trans('auth.failed'),
-        'password_confirmation' => trans('auth.failed')]);
+
+
+
     }
 
     /**

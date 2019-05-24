@@ -12,7 +12,7 @@ class Persona extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User', 'id_persona');
+        return $this->hasone('App\User', 'id_persona');
     }
     public function desarrollador()
     {
