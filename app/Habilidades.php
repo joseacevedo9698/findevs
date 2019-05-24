@@ -4,12 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Hv_link extends Model
+class Habilidades extends Model
 {
-    protected $table = 'hv_links';
-    protected $fillable = ['url', 'id_desarrollador'];
+    protected $table = 'habilidades';
+    protected $fillable = ['Nombre_habilidad','Fecha_aprendizaje','Institucion','id_desarrollador'];
     protected $guarded = ['id'];
-
     public function desarrollador()
     {
         return $this->belongsTo('App\Desarrollador', 'id_desarrollador');

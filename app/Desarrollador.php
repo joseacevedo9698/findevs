@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Desarrollador extends Model
 {
+    protected $table = 'desarrolladors';
+    protected $fillable = ['id_persona', 'Ocupacion','Disponibilidad','Experiencia','Link_HV'];
+    protected $guarded = ['id'];
 
 
     public function persona()
@@ -25,7 +28,15 @@ class Desarrollador extends Model
 
     public function hv_link()
     {
-        return $this->hasOne('App\Hv_link', 'Link_HV');
+        return $this->hasMany('App\Hv_link', 'id_desarrollador');
     }
 
+    public function Experiencia()
+    {
+        return $this->hasMany('App\Experiencia_laboral', 'id_desarrollador');
+    }
+    public function Habilidad()
+    {
+        return $this->hasMany('App\Habilidades', 'id_desarrollador');
+    }
 }

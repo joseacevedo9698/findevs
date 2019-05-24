@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reclutador extends Model
 {
+    protected $table = 'reclutadors';
+    protected $fillable = ['id_persona', 'empresa','puesto'];
+    protected $guarded = ['id'];
 
 
     public function persona()
