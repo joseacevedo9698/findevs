@@ -39,4 +39,9 @@ class Desarrollador extends Model
     {
         return $this->hasMany('App\Habilidades', 'id_desarrollador');
     }
+
+    public function reclutador_observando()
+    {
+        return $this->belongsToMany('App\Reclutador', 'desarrollo_observados', 'id_desarrollador', 'id_reclutador');
+    }
 }

@@ -13,14 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('desarrollador_list', 'LecturaController@DesarrolladoresList');
-    Route::get('desarrollador_list/habilidad/{name}', 'LecturaController@DesarrolladoresListHabilidad');
-});
 
 
 Route::resource('Register', 'PersonaController');
@@ -33,3 +25,17 @@ Route::group(['prefix'=> 'auth'],function(){
     });
 });
 
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('desarrollador_list', 'LecturaController@DesarrolladoresList');
+    Route::get('desarrollador_list/habilidad/{name}', 'LecturaController@DesarrolladoresListHabilidad');
+    Route::get('reclutador/{id}','LecturaController@GetReclutador');
+    Route::get('desarrollador/{id}','LecturaController@GetDesarrollador');
+    Route::post('reclutar/{id}','LecturaController@ReclutarDesarrollador');
+    Route::post('observar/{id}','LecturaController@ObservarDesarrollador');
+    // Route::post('update/state/{id}','LecturaController@updateDesarrollador');
+
+});

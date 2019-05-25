@@ -14,7 +14,7 @@ class CreateReclutadorsTable extends Migration
     public function up()
     {
         Schema::create('reclutadors', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->Increments('id');
             $table->integer('id_persona')->unsigned();
             $table->string('empresa');
             $table->string('puesto');
