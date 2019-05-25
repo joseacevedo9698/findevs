@@ -14,16 +14,16 @@ class Desarrollador extends Model
 
     public function persona()
     {
-        return $this->hasone('App\Persona', 'id_persona');
+        return $this->belongsTo('App\Persona', 'id_persona');
     }
     public function ocupacion()
     {
-        return $this->hasOne('App\Ocupacion', 'Ocupacion');
+        return $this->belongsTo('App\Ocupacion', 'Ocupacion');
     }
 
     public function disponibilidad()
     {
-        return $this->hasOne('App\Disponibilidad', 'Disponibilidad', 'id');
+        return $this->belongsTo('App\Disponibilidad', 'Disponibilidad', 'id');
     }
 
     public function hv_link()

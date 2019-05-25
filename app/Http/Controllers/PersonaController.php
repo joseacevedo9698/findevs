@@ -84,7 +84,6 @@ class PersonaController extends Controller
             $user->save();
             $tipo = $request->input('tipo');
             if ($tipo==1) {
-                return "hola";
                 $experiencia=[
                     [
                         'Nombre_empresa' => 'apps.co',

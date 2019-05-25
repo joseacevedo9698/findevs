@@ -17,6 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('profile', 'LecturaController@DesarrolladoresList');
+});
+
+
 Route::resource('Register', 'PersonaController');
 
 Route::group(['prefix'=> 'auth'],function(){
@@ -26,3 +31,4 @@ Route::group(['prefix'=> 'auth'],function(){
         Route::get('user', 'AuthController@user');
     });
 });
+
