@@ -10,6 +10,7 @@ use App\Hv_link;
 use App\Habilidades;
 use Illuminate\Http\Request;
 use Validator;
+use App\Reclutador;
 
 class PersonaController extends Controller
 {
@@ -81,31 +82,40 @@ class PersonaController extends Controller
             $user->remember_token = str_random(60);
             $persona->user()->save($user);
             $user->save();
+            $tipo = $request->input('tipo');
+            if ($tipo==1) {
+                return "hola";
+                $experiencia=[
+                    [
+                        'Nombre_empresa' => 'apps.co',
+                        'Cargo' => 'Gerente',
+                        'Tiempo' => '2014/05/08'
+                    ]
+                    ];
+                $proyectos=[
+                    [
+                        'url' => 'comics-gaia.test',
+                        'descripcion' => 'esta es una descripcion'
+                    ]
+                    ];
+                $habilidades=[
+                    [
+                        'Nombre_habilidad' => 'PHP',
+                        'Fecha' => '2019/06/05',
+                        'Institucion' => 'Centro Inca'
+                    ]
+                    ];
+                $ocupacion =$request->input('ocupacion');
+                $disponibilidad =$request->input('disponibilidad');
+                $link_HV =$request->input('link_HV');
+                $this->insertdesarrollador($persona->id,$experiencia,$ocupacion,$disponibilidad,$habilidades,$link_HV,$proyectos);
+            }else{
+                if ($tipo == 0) {
+                    $this->insertReclutador($persona->id,$request->input('empresa'),$request->input('puesto'));
+                }
+            }
 
-            $experiencia=[
-                [
-                    'Nombre_empresa' => 'apps.co',
-                    'Cargo' => 'Gerente',
-                    'Tiempo' => '2014/05/08'
-                ]
-                ];
-            $proyectos=[
-                [
-                    'url' => 'comics-gaia.test',
-                    'descripcion' => 'esta es una descripcion'
-                ]
-                ];
-            $habilidades=[
-                [
-                    'Nombre_habilidad' => 'PHP',
-                    'Fecha' => '2019/06/05',
-                    'Institucion' => 'Centro Inca'
-                ]
-                ];
-            $ocupacion =$request->input('ocupacion');
-            $disponibilidad =$request->input('disponibilidad');
-            $link_HV =$request->input('link_HV');
-            $this->insertdesarrollador($persona->id,$experiencia,$ocupacion,$disponibilidad,$habilidades,$link_HV,$proyectos);
+
 
             return "success";
         }
@@ -225,6 +235,15 @@ class PersonaController extends Controller
             return true;
         }
         return false;
+    }
+
+    public function insertReclutador($id_persona,$empresa,$puesto)
+    {
+        $reclutador = new Reclutador();
+        $reclutador->id_persona = $id_persona;
+        $reclutador->empresa = $empresa;
+        $reclutador->puesto = $puesto;
+        $reclutador->save();
     }
 
 }
