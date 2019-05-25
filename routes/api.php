@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('profile', 'LecturaController@DesarrolladoresList');
+    Route::get('desarrollador_list', 'LecturaController@DesarrolladoresList');
+    Route::get('desarrollador_list/habilidad/{name}', 'LecturaController@DesarrolladoresListHabilidad');
 });
 
 
