@@ -34,7 +34,8 @@ class LecturaController extends Controller
             $habilidades = Habilidades::with('desarrollador')->where('Nombre_habilidad', $name)->get();
             return response()->json([
                 'User' => $request->user(),
-                'habilidades' => $habilidades->all()
+                'habilidades' => $habilidades->all(),
+                'Persona' => $habilidades->all()
             ]);
         } else {
             return $this->NotAuth();
@@ -64,7 +65,7 @@ class LecturaController extends Controller
         if ($this->validateReclutador($request) == 1) {
             $persona = DB::table('personas')->where('id', $id)->count();
             if ($persona == 1) {
-                $desarrollador = DB::table('desarrolladors')->where('id', $id)->get();
+                $desarrollador = DB::table('desarrolladors')->where('id_persona', $id)->get();
                 $count = DB::table('desarrolladors')->where('id', $id)->count();
                 if ($count == 1) {
                     return response()->json([

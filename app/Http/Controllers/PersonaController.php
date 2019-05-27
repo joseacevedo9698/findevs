@@ -99,7 +99,12 @@ class PersonaController extends Controller
                     ];
                 $habilidades=[
                     [
-                        'Nombre_habilidad' => 'PHP',
+                        'Nombre_habilidad' => 'JavaScript',
+                        'Fecha' => '2019/06/05',
+                        'Institucion' => 'Centro Inca'
+                    ],
+                    [
+                        'Nombre_habilidad' => 'C++',
                         'Fecha' => '2019/06/05',
                         'Institucion' => 'Centro Inca'
                     ]
